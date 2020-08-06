@@ -1,0 +1,43 @@
+{
+  "name": "api-autenticacao",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Api rest para autenticação via LDAP",
+  "scripts": {
+    "dev": "nodemon --watch \"src/\" --exec \"ts-node src/entry.ts\" -e ts",
+    "test": "jest --no-cache",
+    "build": "tsc",
+    "prod": "npm run build && node dist/entry.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^26.0.9",
+    "@types/supertest": "^2.0.10",
+    "jest": "^26.2.2",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.1.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.7",
+    "express": "^4.17.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "\\.test\\.ts",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
