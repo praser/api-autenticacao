@@ -1,5 +1,5 @@
-import { user } from './User.fixture';
-import { jwt as subject } from './Jwt.fixture';
+import { user } from '../../entities/User.fixture';
+import { jwtProvider as subject } from './JwtProvider.fixture';
 
 describe('Test Jwt entity', () => {
   it('is expected to generate a jwt', () => {

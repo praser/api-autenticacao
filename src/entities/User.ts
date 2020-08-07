@@ -7,7 +7,7 @@ interface IUser {
   name: string;
 }
 
-class User {
+class User implements IUser {
   public readonly birthday: Date;
 
   public readonly cpf: string;

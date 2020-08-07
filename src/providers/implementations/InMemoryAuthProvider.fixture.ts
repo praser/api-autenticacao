@@ -1,6 +1,6 @@
 import InMemoryAuthProvider from './InMemoryAuthProvider';
 import { ICredentials } from '../IAuthProvider';
-import { props } from '../../entities/Jwt.fixture';
+import { props } from './JwtProvider.fixture';
 
 const authProvider = new InMemoryAuthProvider(props);
 const goodCredentials: ICredentials = {

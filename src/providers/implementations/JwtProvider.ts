@@ -1,22 +1,9 @@
 import jwt, { Secret } from 'jsonwebtoken';
 import { getMilliseconds } from 'date-fns';
-import User, { IUser } from './User';
+import User from '../../entities/User';
+import { IJwtProvider, IJwtOptions, IPayload } from '../IJwtProvider';
 
-interface IPayload {
-  iat: number,
-  iss: string,
-  nbf: number,
-  exp: number,
-  user: IUser,
-}
-
-interface IJwtOptions {
-  expiration: number;
-  issuer: string;
-  secret: Secret
-}
-
-class Jwt {
+class Jwt implements IJwtProvider {
   private expiration: number;
 
   private issuer: string;

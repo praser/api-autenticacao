@@ -1,5 +1,5 @@
 import faker from 'faker';
-import Jwt from './Jwt';
+import JwtProvider from './JwtProvider';
 
 const props = {
   expiration: faker.random.number(),
@@ -7,6 +7,6 @@ const props = {
   secret: faker.random.word(),
 };
 
-const jwt = new Jwt(props);
+const jwtProvider = new JwtProvider(props);
 
-export { props, jwt };
+export { props, jwtProvider };

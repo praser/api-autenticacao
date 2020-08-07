@@ -1,5 +1,5 @@
 import IAuthProvider, { ICredentials, IAuthResult } from '../IAuthProvider';
-import Jwt, { IJwtOptions } from '../../entities/Jwt';
+import Jwt, { IJwtOptions } from './JwtProvider';
 import User from '../../entities/User';
 
 class InMemoryAuthProvider implements IAuthProvider {

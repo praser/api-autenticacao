@@ -1,6 +1,6 @@
 import DoLoginUseCase from './DoLoginUseCase';
 import InMemoryAuthProvider from '../../providers/implementations/InMemoryAuthProvider';
-import { props } from '../../entities/Jwt.fixture';
+import { props } from '../../providers/implementations/JwtProvider.fixture';
 
 InMemoryAuthProvider.prototype.auth = jest.fn();
 const mockedAuthProvider = new InMemoryAuthProvider(props);
