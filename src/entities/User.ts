@@ -5,6 +5,8 @@ interface IUser {
   cpf: string;
   id: string;
   name: string;
+  physicalLotationId: number;
+  physicalLotationAbbreviation: string;
 }
 
 class User implements IUser {
@@ -16,11 +18,17 @@ class User implements IUser {
 
   public readonly name: string;
 
+  public readonly physicalLotationId: number;
+
+  public readonly physicalLotationAbbreviation: string;
+
   constructor(props: IUser) {
     this.birthday = props.birthday;
     this.cpf = props.cpf;
     this.id = props.id;
     this.name = props.name;
+    this.physicalLotationId = props.physicalLotationId;
+    this.physicalLotationAbbreviation = props.physicalLotationAbbreviation;
   }
 
   public serialize(): IUser {

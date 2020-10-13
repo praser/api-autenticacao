@@ -14,6 +14,8 @@ class InMemoryAuthProvider implements IAuthProvider {
       cpf: '01133281176',
       id: 'c091800',
       name: 'Rubens Praser Júnior',
+      physicalLotationId: 5385,
+      physicalLotationAbbreviation: 'GEOTR',
     });
   }
 
