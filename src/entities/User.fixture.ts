@@ -12,7 +12,7 @@ const physicalLotationId = 5385;
 const physicalLotationAbbreviation = 'GEOTR';
 
 const data: IUser = {
-  birthday, cpf, id, name, physicalLotationAbbreviation, physicalLotationId, photo
+  birthday, cpf, id, name, physicalLotationAbbreviation, physicalLotationId, photo,
 };
 
 const user = new User(data);

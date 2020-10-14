@@ -1,6 +1,7 @@
 import dotenv from 'dotenv-safe';
-dotenv.config();
 
 import server from './server';
+
+dotenv.config();
 
 server.listen(3000);
