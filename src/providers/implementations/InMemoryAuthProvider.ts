@@ -16,6 +16,7 @@ class InMemoryAuthProvider implements IAuthProvider {
       name: 'Rubens Praser Júnior',
       physicalLotationId: 5385,
       physicalLotationAbbreviation: 'GEOTR',
+      photo: 'https://www.flaticon.com/svg/static/icons/svg/147/147144.svg',
     });
   }
 
