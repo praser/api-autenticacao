@@ -3,9 +3,10 @@ import HttpStatusCode from './httpStatusCode';
 import DoLoginController from './Controllers/DoLoginController';
 import doLoginUseCase from '../useCases/DoLogin';
 
+const appPath = process.env.APP_PATH || ''
 const router = Router();
 
-router.get('/', (_, res): Response => {
+router.get(`${appPath}/`, (_, res): Response => {
   const healthcheck = {
     uptime: process.uptime(),
     message: 'OK',
@@ -15,7 +16,7 @@ router.get('/', (_, res): Response => {
   return res.status(HttpStatusCode.OK).json(healthcheck);
 });
 
-router.post('/authenticate', (request, response) => {
+router.post(`${appPath}/authenticate`, (request, response) => {
   const controller = new DoLoginController(doLoginUseCase);
   return controller.handle(request, response);
 });
