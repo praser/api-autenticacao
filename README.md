@@ -47,8 +47,8 @@
 - [Exemplos de uso](#exemplos-de-uso)
 - [Roadmap](#roadmap)
 - [Contribuindo](#contribuindo)
-- [License](#license)
-- [Contact](#contact)
+- [Licença](#licença)
+- [Contato](#contato)
 - [Acknowledgements](#acknowledgements)
 
 <!--BUILT WITH -->
@@ -175,35 +175,27 @@ Veja os [issues abertos](https://github.com/praser/api-autenticacao/issues) para
 
 ## Contribuindo
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+As contribuições são o que tornam a comunidade de código aberto um lugar incrível para aprender, inspirar e criar. Quaisquer contribuições que você fizer serão **muito bem vindas**.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Faça um fork do projeto
+2. Crie seu Feature Branch (`git checkout -b feature / AmazingFeature`)
+3. Faça commit de suas alterações (`git commit -m 'Add some AmazingFeature'`)
+4. Envie para o Branch (`git push origin feature / AmazingFeature`)
+5. Abra uma pull request
 
-<!-- LICENSE -->
+<!-- Licença -->
 
-## License
+## Licença
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distribuído sob a licença MIT. Veja `LICENSE`para mais informações.
 
-<!-- CONTACT -->
+<!-- Contato -->
 
-## Contact
+## Contato
 
-Your Name - [@rpaser](https://twitter.com/rpaser) - email
+Rubens Praser júnior - [@rpaser](https://twitter.com/rpaser) - email
 
-Project Link: [https://github.com/praser/api-autenticacao](https://github.com/praser/api-autenticacao)
-
-<!-- ACKNOWLEDGEMENTS -->
-
-## Acknowledgements
-
-- []()
-- []()
-- []()
+Link do projeto: [https://github.com/praser/api-autenticacao](https://github.com/praser/api-autenticacao)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -219,5 +211,5 @@ Project Link: [https://github.com/praser/api-autenticacao](https://github.com/pr
 [license-shield]: https://img.shields.io/github/license/praser/repo.svg?style=flat-square
 [license-url]: https://github.com/praser/repo/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/praser
+[linkedin-url]: https://www.linkedin.com/in/rubens-praser-junior/
 [product-screenshot]: images/screenshot.png
