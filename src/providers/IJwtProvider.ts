@@ -1,4 +1,5 @@
 import { Secret } from 'jsonwebtoken';
+
 import { IUser } from '../entities/User';
 
 interface IPayload {
@@ -10,7 +11,7 @@ interface IPayload {
 }
 
 interface IJwtOptions {
-  expiration: number;
+  duration: number;
   issuer: string;
   secret: Secret
 }

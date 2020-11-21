@@ -1,28 +1,31 @@
 import jwt, { Secret } from 'jsonwebtoken';
-import { getMilliseconds } from 'date-fns';
-import User from '../../entities/User';
+
+import { getUnixTime } from 'date-fns';
+
 import { IJwtProvider, IJwtOptions, IPayload } from '../IJwtProvider';
+import User from '../../entities/User';
 
 class Jwt implements IJwtProvider {
-  private expiration: number;
+  private duration: number;
 
   private issuer: string;
 
   private secret: Secret;
 
   constructor(props: IJwtOptions) {
-    this.expiration = props.expiration;
+    this.duration = props.duration;
     this.issuer = props.issuer;
     this.secret = props.secret;
   }
 
   private payload(user: User): IPayload {
-    const currentTime: number = getMilliseconds(new Date());
+    const currentTime: number = getUnixTime(new Date());
+    const expiration: number = currentTime + this.duration;
     return {
       iat: currentTime,
       iss: this.issuer,
       nbf: currentTime,
-      exp: this.expiration,
+      exp: expiration,
       user: user.serialize(),
     };
   }
