@@ -8,6 +8,7 @@ import IAuthProvider, { ICredentials, IAuthResult } from '../IAuthProvider';
 import User from '../../entities/User';
 
 import Jwt, { IJwtOptions } from './JwtProvider';
+import BadCredentialsError from '../../Errors/BadCredentialsError';
 
 class LdapAuthProvider implements IAuthProvider {
   private jwt: Jwt
@@ -34,8 +35,22 @@ class LdapAuthProvider implements IAuthProvider {
           });
         })
         .catch(() => {
-          reject(new Error('Bad credentials'));
+          reject(new BadCredentialsError());
         });
+    });
+  }
+
+  async authWithUsernameOnly(username: string): Promise<IAuthResult> {
+    return new Promise((resolve, reject) => {
+      this.search(username)
+        .then((searchResult) => {
+          this.setUser(searchResult);
+          resolve({
+            result: true,
+            token: this.jwt.generate(this.user),
+          });
+        })
+        .catch(() => reject(new BadCredentialsError()));
     });
   }
 
