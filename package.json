@@ -9,7 +9,7 @@
     "build": "tsc",
     "prod": "npm run build && node dist/entry.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "coverage": "jest --coverage --coverageDirectory='coverage' --collectCOverageFrom='src/**/*.ts'"
+    "coverage": "jest --coverage --coverageDirectory='coverage' --collectCoverageFrom='src/**/*.ts'"
   },
   "keywords": [],
   "author": "",

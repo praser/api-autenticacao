@@ -9,6 +9,9 @@ module.exports = {
     'import/resolver': {
       typescript: {},
     },
+    react: {
+      version: '999.999.999',
+    },
   },
   rules: {
     'import/extensions': [
@@ -30,7 +33,12 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       2,
       {
-        devDependencies: ['**/*.test.ts', '**/*.test.tsx', '**/*.fixture.ts', '**/*.fixture.tsx'],
+        devDependencies: [
+          '**/*.test.ts',
+          '**/*.test.tsx',
+          '**/*.fixture.ts',
+          '**/*.fixture.tsx',
+        ],
       },
     ],
     '@typescript-eslint/indent': [2, 2],

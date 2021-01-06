@@ -1,9 +1,13 @@
 import { Client, SearchResult } from 'ldapts';
+
 import { parse } from 'date-fns';
+
 import { startCase, toLower, toUpper } from 'lodash';
+
 import IAuthProvider, { ICredentials, IAuthResult } from '../IAuthProvider';
-import Jwt, { IJwtOptions } from './JwtProvider';
 import User from '../../entities/User';
+
+import Jwt, { IJwtOptions } from './JwtProvider';
 
 class LdapAuthProvider implements IAuthProvider {
   private jwt: Jwt
@@ -51,12 +55,12 @@ class LdapAuthProvider implements IAuthProvider {
 
   private async bind(credentials: ICredentials): Promise<void> {
     const { username, password } = credentials;
-    const dn = this.getDN(username);
+    const dn = LdapAuthProvider.getDN(username);
     return this.client.bind(dn, password);
   }
 
   private async search(username: string): Promise<SearchResult> {
-    const dn = this.getDN(username);
+    const dn = LdapAuthProvider.getDN(username);
     return this.client.search(dn);
   }
 
@@ -91,7 +95,7 @@ class LdapAuthProvider implements IAuthProvider {
     this.user = new User(params);
   }
 
-  private getDN(uid: string): string {
+  static getDN(uid: string): string {
     return `uid=${uid},ou=People,o=caixa`;
   }
 }
