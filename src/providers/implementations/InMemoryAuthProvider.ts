@@ -1,11 +1,13 @@
 import IAuthProvider, { ICredentials, IAuthResult } from '../IAuthProvider';
-import Jwt, { IJwtOptions } from './JwtProvider';
 import User from '../../entities/User';
 
-class InMemoryAuthProvider implements IAuthProvider {
-  private jwt: Jwt;
+import Jwt, { IJwtOptions } from './JwtProvider';
+import BadCredentialsError from '../../Errors/BadCredentialsError';
 
-  private user: User;
+class InMemoryAuthProvider implements IAuthProvider {
+  private jwt: Jwt
+
+  private user: User
 
   constructor(props: IJwtOptions) {
     this.jwt = new Jwt(props);
@@ -29,7 +31,34 @@ class InMemoryAuthProvider implements IAuthProvider {
         });
       }
 
-      reject(new Error('Bad credentials'));
+      reject(new BadCredentialsError());
+    });
+  }
+
+  async authWithUsernameOnly(username: string): Promise<IAuthResult> {
+    return new Promise((resolve, reject) => {
+      if (username === 'a') {
+        resolve({
+          result: true,
+          token: this.jwt.generate(this.user),
+        });
+      }
+
+      reject(new BadCredentialsError());
+    });
+  }
+
+  async refresh(token: string): Promise<IAuthResult> {
+    return new Promise((resolve, reject) => {
+      try {
+        const freshToken = this.jwt.refresh(token);
+        resolve({
+          result: true,
+          token: freshToken,
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 }

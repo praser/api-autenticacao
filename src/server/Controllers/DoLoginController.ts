@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
-import DoLoginUseCase from '../../useCases/DoLogin/DoLoginUseCase';
+
 import HttpStatusCode from '../httpStatusCode';
+import DoLoginUseCase from '../../useCases/DoLogin/DoLoginUseCase';
 
 class DoLoginController {
   private doLoginUseCase: DoLoginUseCase;
@@ -16,7 +17,7 @@ class DoLoginController {
       const body = await this.doLoginUseCase.execute(credentials);
       return response.status(HttpStatusCode.OK).json(body);
     } catch (error) {
-      return response.status(HttpStatusCode.FORBIDDEN).json({
+      return response.status(HttpStatusCode.UNAUTHORIZED).json({
         result: false,
         message: error.message,
       });
