@@ -2,17 +2,16 @@ import request from 'supertest';
 
 import HttpStatusCode from '../httpStatusCode';
 import server from '../server';
-import { goodCredentials, badCredentials } from '../../providers/implementations/InMemoryAuthProvider.fixture';
 
-const path = '/authenticate';
+const path = '/authenticate/username';
 const type = 'application/json';
 
-describe(`Testa ${path}`, () => {
+describe(`Test ${path}`, () => {
   test(`[POST] ${path} with good credentials`, async () => {
     const response = await request(server)
       .post(path)
       .type(type)
-      .send({ credentials: goodCredentials });
+      .send({ credentials: { username: 'a' } });
 
     expect(response.status).toBe(200);
     expect(response.body.result).toBeTruthy();
@@ -24,7 +23,7 @@ describe(`Testa ${path}`, () => {
     const response = await request(server)
       .post(path)
       .type(type)
-      .send({ credentials: badCredentials });
+      .send({ credentials: { username: 'invalid' } });
     expect(response.status).toBe(HttpStatusCode.UNAUTHORIZED);
     expect(response.body.result).toBeFalsy();
     expect(response.body.message).toBe('Bad credentials');

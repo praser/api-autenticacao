@@ -7,6 +7,7 @@ import InMemoryAuthProvider from '../providers/implementations/InMemoryAuthProvi
 import LdapAuthProvider from '../providers/implementations/LdapAuthProvider';
 
 import DoLoginUseCase from './DoLogin/DoLoginUseCase';
+import DoLoginWithUsernameOnlyUseCase from './DoLoginWithUsernameOnly/DoLoginWithUsernameOnlyUseCase';
 import DoRefreshUseCase from './DoRefresh/DoRefreshUseCase';
 
 const duration: number = parseInt(process.env.AUTH_EXPIRATION || '3000', 10);
@@ -24,6 +25,7 @@ if (driver === 'ldap') {
 }
 
 const doLoginUseCase = new DoLoginUseCase(authProvider);
+const doLoginWithUsernameOnlyUseCase = new DoLoginWithUsernameOnlyUseCase(authProvider);
 const doRefreshUseCase = new DoRefreshUseCase(authProvider);
 
-export { doLoginUseCase, doRefreshUseCase };
+export { doLoginUseCase, doLoginWithUsernameOnlyUseCase, doRefreshUseCase };

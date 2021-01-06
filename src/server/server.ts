@@ -17,7 +17,13 @@ server.use(
     secret: process.env.AUTH_SECRET as string,
     algorithms: ['HS256'],
     getToken: (req) => req.header('X-Token'),
-  }).unless({ path: [`${appPath}/`, `${appPath}/authenticate`] }),
+  }).unless({
+    path: [
+      `${appPath}/`,
+      `${appPath}/authenticate`,
+      `${appPath}/authenticate/username`,
+    ],
+  }),
 );
 
 export default server;
