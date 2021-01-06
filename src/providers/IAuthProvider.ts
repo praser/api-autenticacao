@@ -10,6 +10,7 @@ interface IAuthResult {
 
 interface IAuthProvider {
   auth(credentials: ICredentials): Promise<IAuthResult>
+  refresh(token: string): Promise<IAuthResult>
 }
 
 export { IAuthProvider as default, ICredentials, IAuthResult };

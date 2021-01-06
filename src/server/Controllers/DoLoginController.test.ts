@@ -1,7 +1,8 @@
 import request from 'supertest';
+
+import HttpStatusCode from '../httpStatusCode';
 import server from '../server';
 import { goodCredentials, badCredentials } from '../../providers/implementations/InMemoryAuthProvider.fixture';
-import HttpStatusCode from '../httpStatusCode';
 
 const path = '/authenticate';
 const type = 'application/json';
@@ -23,7 +24,7 @@ describe(`Testa ${path}`, () => {
       .post(path)
       .type(type)
       .send({ credentials: badCredentials });
-    expect(response.status).toBe(HttpStatusCode.FORBIDDEN);
+    expect(response.status).toBe(HttpStatusCode.UNAUTHORIZED);
     expect(response.body.result).toBeFalsy();
     expect(response.body.message).toBe('Bad credentials');
   });

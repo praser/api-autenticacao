@@ -1,26 +1,55 @@
-import { user as subject, data } from './User.fixture';
+import User from './User';
+import { user, data } from './User.fixture';
 
-describe('Test User entity', () => {
-  test('is expected to have a birthday', () => {
-    expect(subject.birthday).toMatchObject(data.birthday);
+describe('it User entity', () => {
+  it('is expected to have a birthday', () => {
+    expect(user.birthday).toMatchObject(data.birthday);
   });
 
-  test('is expected to have a cpf', () => {
-    expect(subject.cpf).toBe(data.cpf);
+  it('is expected to have a cpf', () => {
+    expect(user.cpf).toBe(data.cpf);
   });
 
-  test('is expected to have a id', () => {
-    expect(subject.id).toBe(data.id);
+  it('is expected to have a id', () => {
+    expect(user.id).toBe(data.id);
   });
 
-  test('is expected to have a name', () => {
-    expect(subject.name).toBe(data.name);
+  it('is expected to have a name', () => {
+    expect(user.name).toBe(data.name);
   });
 
-  test('is expected to correct serialize itself', () => {
-    expect(typeof subject.serialize().birthday).toBe('string');
-    expect(typeof subject.serialize().cpf).toBe('string');
-    expect(typeof subject.serialize().id).toBe('string');
-    expect(typeof subject.serialize().name).toBe('string');
+  it('is expected to have a physical lotation id', () => {
+    expect(user.physicalLotationId).toBe(data.physicalLotationId);
+  });
+
+  it('is expected to have a physical lotation abbreviation', () => {
+    expect(user.physicalLotationAbbreviation).toBe(data.physicalLotationAbbreviation);
+  });
+
+  it('is expected to have a photo', () => {
+    expect(user.photo).toBe(data.photo);
+  });
+
+  it('is expected to correct serialize itself', () => {
+    expect(typeof user.serialize().birthday).toBe('string');
+    expect(typeof user.serialize().cpf).toBe('string');
+    expect(typeof user.serialize().id).toBe('string');
+    expect(typeof user.serialize().name).toBe('string');
+    expect(typeof user.serialize().physicalLotationId).toBe('number');
+    expect(typeof user.serialize().physicalLotationAbbreviation).toBe('string');
+    expect(typeof user.serialize().photo).toBe('string');
+  });
+
+  it('is expected do parse from object', () => {
+    const attr = user.serialize();
+    const parsedUser = User.parse(attr);
+    expect(parsedUser).toBeInstanceOf(User);
+    expect(parsedUser.birthday).toBeInstanceOf(Date);
+    expect(typeof parsedUser.cpf).toBe('string');
+    expect(typeof parsedUser.id).toBe('string');
+    expect(typeof parsedUser.name).toBe('string');
+    expect(typeof parsedUser.physicalLotationId).toBe('number');
+    expect(typeof parsedUser.physicalLotationAbbreviation).toBe('string');
+    expect(typeof parsedUser.photo).toBe('string');
   });
 });

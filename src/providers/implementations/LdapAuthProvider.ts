@@ -6,11 +6,11 @@ import Jwt, { IJwtOptions } from './JwtProvider';
 import User from '../../entities/User';
 
 class LdapAuthProvider implements IAuthProvider {
-  private jwt: Jwt;
+  private jwt: Jwt
 
-  private user: User = new User();
+  private user: User = new User()
 
-  private client: Client;
+  private client: Client
 
   constructor(props: IJwtOptions, url: string) {
     this.client = new Client({ url });
@@ -35,6 +35,20 @@ class LdapAuthProvider implements IAuthProvider {
     });
   }
 
+  async refresh(token: string): Promise<IAuthResult> {
+    return new Promise((resolve, reject) => {
+      try {
+        const freshToken = this.jwt.refresh(token);
+        resolve({
+          result: true,
+          token: freshToken,
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   private async bind(credentials: ICredentials): Promise<void> {
     const { username, password } = credentials;
     const dn = this.getDN(username);
@@ -48,21 +62,36 @@ class LdapAuthProvider implements IAuthProvider {
 
   private setUser(searchResult: SearchResult): void {
     const data = searchResult.searchEntries[0];
-    const birthday: Date = parse(`${data['dt-nascimento']}`, 'dd/MM/yyyy', new Date());
+    const birthday: Date = parse(
+      `${data['dt-nascimento']}`,
+      'dd/MM/yyyy',
+      new Date(),
+    );
     const cpf = `${data['nu-cpf']}`;
     const id: string = toLower(`${data.uid}`);
     const name: string = startCase(toLower(`${data.givenName}`));
-    const physicalLotationId: number = parseInt(`${data['nu-lotacaofisica']}`, 10);
-    const physicalLotationAbbreviation: string = toUpper(`${data['sg-unidade']}`);
+    const physicalLotationId: number = parseInt(
+      `${data['nu-lotacaofisica']}`,
+      10,
+    );
+    const physicalLotationAbbreviation: string = toUpper(
+      `${data['sg-unidade']}`,
+    );
     const photo = `http://tdv.caixa/img/${id}.jpg`;
 
     const params = {
-      birthday, cpf, id, name, physicalLotationId, physicalLotationAbbreviation, photo,
+      birthday,
+      cpf,
+      id,
+      name,
+      physicalLotationId,
+      physicalLotationAbbreviation,
+      photo,
     };
     this.user = new User(params);
   }
 
-  private getDN(uid:string): string {
+  private getDN(uid: string): string {
     return `uid=${uid},ou=People,o=caixa`;
   }
 }
