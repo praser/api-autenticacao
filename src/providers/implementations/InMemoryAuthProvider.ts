@@ -1,6 +1,7 @@
 import IAuthProvider, { ICredentials, IAuthResult } from '../IAuthProvider';
-import Jwt, { IJwtOptions } from './JwtProvider';
 import User from '../../entities/User';
+
+import Jwt, { IJwtOptions } from './JwtProvider';
 
 class InMemoryAuthProvider implements IAuthProvider {
   private jwt: Jwt;
@@ -30,6 +31,20 @@ class InMemoryAuthProvider implements IAuthProvider {
       }
 
       reject(new Error('Bad credentials'));
+    });
+  }
+
+  async refresh(token: string): Promise<IAuthResult> {
+    return new Promise((resolve, reject) => {
+      try {
+        const freshToken = this.jwt.refresh(token);
+        resolve({
+          result: true,
+          token: freshToken,
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 }

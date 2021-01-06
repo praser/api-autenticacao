@@ -33,6 +33,12 @@ class Jwt implements IJwtProvider {
   public generate(user: User): string {
     return jwt.sign(this.payload(user), this.secret);
   }
+
+  public refresh(token: string): string {
+    const { user: userAttr } = jwt.verify(token, this.secret) as IPayload;
+    const user = User.parse(userAttr);
+    return jwt.sign(this.payload(user), this.secret);
+  }
 }
 
 export { Jwt as default, IJwtOptions };

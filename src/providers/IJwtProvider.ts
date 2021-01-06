@@ -1,13 +1,13 @@
 import { Secret } from 'jsonwebtoken';
 
-import { IUser } from '../entities/User';
+import { IUser, IUserAttr } from '../entities/User';
 
 interface IPayload {
   iat: number,
   iss: string,
   nbf: number,
   exp: number,
-  user: IUser,
+  user: IUserAttr,
 }
 
 interface IJwtOptions {
@@ -18,6 +18,7 @@ interface IJwtOptions {
 
 interface IJwtProvider {
   generate(user: IUser): string;
+  refresh(token: string): string;
 }
 
 export { IJwtProvider, IJwtOptions, IPayload };
