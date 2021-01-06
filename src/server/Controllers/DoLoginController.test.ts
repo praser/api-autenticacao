@@ -17,6 +17,7 @@ describe(`Testa ${path}`, () => {
     expect(response.status).toBe(200);
     expect(response.body.result).toBeTruthy();
     expect(response.body).toHaveProperty('token');
+    expect(response.body.token.split('.').length).toBe(3);
   });
 
   test(`[POST]${path} with bad credentials`, async () => {
