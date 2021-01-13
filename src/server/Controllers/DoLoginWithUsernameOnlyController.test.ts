@@ -28,4 +28,13 @@ describe(`Test ${path}`, () => {
     expect(response.body.result).toBeFalsy();
     expect(response.body.message).toBe('Bad credentials');
   });
+
+  test(`[POST]${path} whith no credentials is expected to authenticate current session user`, async () => {
+    const response = await request(server).post(path).type(type).send();
+
+    expect(response.status).toBe(200);
+    expect(response.body.result).toBeTruthy();
+    expect(response.body).toHaveProperty('token');
+    expect(response.body.token.split('.').length).toBe(3);
+  });
 });

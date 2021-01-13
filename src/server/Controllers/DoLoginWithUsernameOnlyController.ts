@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 
+import os from 'os';
+
 import HttpStatusCode from '../httpStatusCode';
 import DoLoginWithUsernameOnlyUseCase from '../../useCases/DoLoginWithUsernameOnly/DoLoginWithUsernameOnlyUseCase';
 
@@ -10,8 +12,19 @@ class DoLoginWithUsernameOnlyController {
     this.doLoginWithUsernameOnlyUseCase = doLoginWithUsernameOnlyUseCase;
   }
 
+  private static getUsernameFromRequest(request: Request): string | null {
+    return 'credentials' in request.body
+      ? request.body.credentials.username
+      : null;
+  }
+
+  private static getUsernameFromOS(): string {
+    return process.env.ENVIRONMENT === 'PRD' ? os.userInfo().username : 'a';
+  }
+
   async handle(request: Request, response: Response): Promise<Response> {
-    const { username } = request.body.credentials;
+    const username = DoLoginWithUsernameOnlyController.getUsernameFromRequest(request)
+      || DoLoginWithUsernameOnlyController.getUsernameFromOS();
 
     try {
       const body = await this.doLoginWithUsernameOnlyUseCase.execute(username);
