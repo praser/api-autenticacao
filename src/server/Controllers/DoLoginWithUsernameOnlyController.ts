@@ -12,24 +12,32 @@ class DoLoginWithUsernameOnlyController {
     this.doLoginWithUsernameOnlyUseCase = doLoginWithUsernameOnlyUseCase;
   }
 
-  private static getUsernameFromRequest(request: Request): string | null {
-    return 'credentials' in request.body
-      ? request.body.credentials.username
-      : null;
+  private static isWithCredentials(request: Request): boolean {
+    return 'credentials' in request.body;
+  }
+
+  private static getUsernameFromRequest(request: Request): string {
+    return request.body.credentials.username as string;
   }
 
   private static async getUsernameFromOS(): Promise<string> {
     const res = await fetch(process.env.SESSION_USER_ENDPOINT as string);
     const json = await res.json();
     const { id: username } = json;
-    return username;
+
+    return new Promise((resolve, reject) => (username ? resolve(username) : reject()));
   }
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const username = DoLoginWithUsernameOnlyController.getUsernameFromRequest(request)
-      || await DoLoginWithUsernameOnlyController.getUsernameFromOS();
-
     try {
+      let username: string;
+
+      if (DoLoginWithUsernameOnlyController.isWithCredentials(request)) {
+        username = DoLoginWithUsernameOnlyController.getUsernameFromRequest(request);
+      } else {
+        username = await DoLoginWithUsernameOnlyController.getUsernameFromOS();
+      }
+
       const body = await this.doLoginWithUsernameOnlyUseCase.execute(username);
       return response.status(HttpStatusCode.OK).json(body);
     } catch (error) {
