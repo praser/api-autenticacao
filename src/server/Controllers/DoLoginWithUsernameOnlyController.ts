@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import os from 'os';
+import fetch from 'node-fetch';
 
 import HttpStatusCode from '../httpStatusCode';
 import DoLoginWithUsernameOnlyUseCase from '../../useCases/DoLoginWithUsernameOnly/DoLoginWithUsernameOnlyUseCase';
@@ -18,13 +18,16 @@ class DoLoginWithUsernameOnlyController {
       : null;
   }
 
-  private static getUsernameFromOS(): string {
-    return process.env.ENVIRONMENT === 'PRD' ? os.userInfo().username : 'a';
+  private static async getUsernameFromOS(): Promise<string> {
+    const res = await fetch(process.env.SESSION_USER_ENDPOINT as string);
+    const json = await res.json();
+    const { id: username } = json;
+    return username;
   }
 
   async handle(request: Request, response: Response): Promise<Response> {
     const username = DoLoginWithUsernameOnlyController.getUsernameFromRequest(request)
-      || DoLoginWithUsernameOnlyController.getUsernameFromOS();
+      || await DoLoginWithUsernameOnlyController.getUsernameFromOS();
 
     try {
       const body = await this.doLoginWithUsernameOnlyUseCase.execute(username);
